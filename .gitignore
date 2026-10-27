@@ -1,0 +1,25 @@
+# Storage & Generated Data
+storage/backups/*
+!storage/backups/.gitkeep
+storage/exports/*
+!storage/exports/.gitkeep
+storage/invoices/*
+!storage/invoices/.gitkeep
+storage/logs/*
+!storage/logs/.gitkeep
+storage/temp/*
+!storage/temp/.gitkeep
+storage/uploads/*
+!storage/uploads/.gitkeep
+storage/ai-cache/*
+!storage/ai-cache/.gitkeep
+
+# Sensitive or Local Environment
+config/config.local.php
+*.log
+
+# OS & Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

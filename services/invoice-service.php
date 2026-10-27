@@ -1,0 +1,232 @@
+<?php
+/**
+ * YBT Management Software — Invoice Engine Service
+ * Handles invoice generation, item calculations, tax breakdown (CGST/SGST/IGST),
+ * status transitions, and quotation-to-invoice conversions.
+ */
+
+class InvoiceService {
+    /**
+     * Generate next sequential invoice number
+     */
+    public static function generateInvoiceNumber(int $businessId): string {
+        $business = Database::fetch("SELECT invoice_prefix, invoice_next_number FROM businesses WHERE id = ?", [$businessId]);
+        $prefix = $business['invoice_prefix'] ?? 'INV-';
+        $next = $business['invoice_next_number'] ?? 1;
+
+        // Increment sequence in business record
+        Database::query("UPDATE businesses SET invoice_next_number = invoice_next_number + 1 WHERE id = ?", [$businessId]);
+
+        return $prefix . str_pad((string)$next, 4, '0', STR_PAD_LEFT);
+    }
+
+    /**
+     * Create a complete invoice with line items
+     */
+    public static function create(int $businessId, array $data, array $items, int $userId): int {
+        $db = Database::getInstance();
+        $db->beginTransaction();
+
+        try {
+            $customer = Database::fetch("SELECT * FROM customers WHERE id = ? AND business_id = ?", [$data['customer_id'], $businessId]);
+            $business = Database::fetch("SELECT * FROM businesses WHERE id = ?", [$businessId]);
+
+            if (!$customer) {
+                throw new Exception('Invalid customer selected.');
+            }
+
+            $invoiceNumber = !empty($data['invoice_number']) ? trim($data['invoice_number']) : self::generateInvoiceNumber($businessId);
+            $invoiceDate = $data['invoice_date'] ?? date('Y-m-d');
+            $dueDays = !empty($data['due_days']) ? (int)$data['due_days'] : (int)($business['default_due_days'] ?? 15);
+            $dueDate = $data['due_date'] ?? date('Y-m-d', strtotime("+$dueDays days", strtotime($invoiceDate)));
+
+            // Determine if Intra-state or Inter-state GST
+            $businessState = strtolower(trim($business['state'] ?? ''));
+            $customerState = strtolower(trim($customer['billing_state'] ?? ''));
+            $isInterstate = ($businessState !== '' && $customerState !== '' && $businessState !== $customerState);
+
+            $subtotal = 0.0;
+            $totalDiscount = 0.0;
+            $cgstTotal = 0.0;
+            $sgstTotal = 0.0;
+            $igstTotal = 0.0;
+            $taxTotal = 0.0;
+            $processedItems = [];
+
+            foreach ($items as $idx => $item) {
+                $desc = trim($item['description'] ?? $item['name'] ?? '');
+                if ($desc === '') continue;
+
+                $qty = max(0.001, (float)($item['quantity'] ?? 1));
+                $price = max(0, (float)($item['unit_price'] ?? 0));
+                $disc = max(0, (float)($item['discount_amount'] ?? 0));
+                $taxRate = max(0, (float)($item['tax_rate'] ?? 18));
+                $hsn = trim($item['hsn_sac'] ?? '');
+                $unit = trim($item['unit'] ?? 'Nos');
+
+                $itemBase = $qty * $price;
+                $afterDisc = max(0, $itemBase - $disc);
+                $itemTax = ($afterDisc * $taxRate) / 100;
+                $lineTotal = $afterDisc + $itemTax;
+
+                $cgstRate = 0; $cgstAmt = 0;
+                $sgstRate = 0; $sgstAmt = 0;
+                $igstRate = 0; $igstAmt = 0;
+
+                if ($isInterstate) {
+                    $igstRate = $taxRate;
+                    $igstAmt = $itemTax;
+                    $igstTotal += $igstAmt;
+                } else {
+                    $cgstRate = $taxRate / 2;
+                    $cgstAmt = $itemTax / 2;
+                    $sgstRate = $taxRate / 2;
+                    $sgstAmt = $itemTax / 2;
+                    $cgstTotal += $cgstAmt;
+                    $sgstTotal += $sgstAmt;
+                }
+
+                $subtotal += $afterDisc;
+                $taxTotal += $itemTax;
+                $totalDiscount += $disc;
+
+                $processedItems[] = [
+                    'product_id' => !empty($item['product_id']) ? (int)$item['product_id'] : null,
+                    'description' => $desc,
+                    'quantity' => $qty,
+                    'unit' => $unit,
+                    'unit_price' => $price,
+                    'discount_amount' => $disc,
+                    'tax_rate' => $taxRate,
+                    'tax_amount' => $itemTax,
+                    'cgst_rate' => $cgstRate,
+                    'cgst_amount' => $cgstAmt,
+                    'sgst_rate' => $sgstRate,
+                    'sgst_amount' => $sgstAmt,
+                    'igst_rate' => $igstRate,
+                    'igst_amount' => $igstAmt,
+                    'hsn_sac' => $hsn,
+                    'line_total' => $lineTotal,
+                    'sort_order' => $idx + 1
+                ];
+            }
+
+            if (empty($processedItems)) {
+                throw new Exception('Invoice must contain at least one valid line item.');
+            }
+
+            $overallDiscount = max(0, (float)($data['discount_total'] ?? 0));
+            $grandTotal = max(0, ($subtotal - $overallDiscount) + $taxTotal);
+            $status = $data['status'] ?? 'sent';
+
+            // Snapshots
+            $businessSnapshot = json_encode([
+                'name' => $business['name'],
+                'legal_name' => $business['legal_name'],
+                'gstin' => $business['gstin'],
+                'pan' => $business['pan'],
+                'email' => $business['email'],
+                'phone' => $business['phone'],
+                'address' => trim("{$business['address_line1']} {$business['address_line2']}, {$business['city']}, {$business['state']} {$business['postal_code']}"),
+                'bank_name' => $business['bank_name'],
+                'account_number' => $business['account_number'],
+                'ifsc_code' => $business['ifsc_code'],
+                'upi_id' => $business['upi_id']
+            ]);
+
+            $customerSnapshot = json_encode([
+                'name' => $customer['name'],
+                'company_name' => $customer['company_name'],
+                'gstin' => $customer['gstin'],
+                'email' => $customer['email'],
+                'phone' => $customer['phone'],
+                'address' => trim("{$customer['billing_address_line1']} {$customer['billing_address_line2']}, {$customer['billing_city']}, {$customer['billing_state']} {$customer['billing_postal_code']}")
+            ]);
+
+            // Insert invoice header
+            $invoiceId = Database::insert('invoices', [
+                'business_id' => $businessId,
+                'customer_id' => $customer['id'],
+                'quotation_id' => !empty($data['quotation_id']) ? (int)$data['quotation_id'] : null,
+                'invoice_number' => $invoiceNumber,
+                'invoice_date' => $invoiceDate,
+                'due_date' => $dueDate,
+                'subtotal' => $subtotal,
+                'discount_total' => $totalDiscount + $overallDiscount,
+                'tax_total' => $taxTotal,
+                'cgst_total' => $cgstTotal,
+                'sgst_total' => $sgstTotal,
+                'igst_total' => $igstTotal,
+                'grand_total' => $grandTotal,
+                'amount_paid' => 0.00,
+                'outstanding' => $grandTotal,
+                'status' => $status,
+                'notes' => trim($data['notes'] ?? $business['default_notes'] ?? ''),
+                'terms' => trim($data['terms'] ?? $business['default_terms'] ?? ''),
+                'place_of_supply' => $customer['billing_state'] ?? $business['state'],
+                'business_snapshot' => $businessSnapshot,
+                'customer_snapshot' => $customerSnapshot,
+                'issued_at' => ($status !== 'draft') ? date('Y-m-d H:i:s') : null,
+                'created_by' => $userId
+            ]);
+
+            // Insert line items
+            foreach ($processedItems as $row) {
+                $row['invoice_id'] = $invoiceId;
+                Database::insert('invoice_items', $row);
+            }
+
+            ActivityLog::log($businessId, $userId, 'invoice_created', 'invoice', $invoiceId, "Created invoice {$invoiceNumber} for ₹" . number_format($grandTotal, 2));
+
+            $db->commit();
+            return $invoiceId;
+        } catch (Exception $e) {
+            $db->rollBack();
+            throw $e;
+        }
+    }
+
+    /**
+     * Get single invoice with customer and line items
+     */
+    public static function getById(int $invoiceId, int $businessId): ?array {
+        $invoice = Database::fetch(
+            "SELECT i.*, c.name as customer_name, c.company_name, c.email as customer_email, c.phone as customer_phone, c.gstin as customer_gstin,
+             b.name as business_name, b.email as business_email, b.phone as business_phone, b.gstin as business_gstin, b.bank_name, b.account_number, b.ifsc_code, b.upi_id
+             FROM invoices i
+             JOIN customers c ON i.customer_id = c.id
+             JOIN businesses b ON i.business_id = b.id
+             WHERE i.id = ? AND i.business_id = ?",
+            [$invoiceId, $businessId]
+        );
+
+        if (!$invoice) return null;
+
+        $invoice['items'] = Database::fetchAll(
+            "SELECT * FROM invoice_items WHERE invoice_id = ? ORDER BY sort_order ASC, id ASC",
+            [$invoiceId]
+        );
+
+        $invoice['payments'] = Database::fetchAll(
+            "SELECT p.*, pa.amount as allocated_amount 
+             FROM payment_allocations pa
+             JOIN payments p ON pa.payment_id = p.id
+             WHERE pa.invoice_id = ? ORDER BY p.payment_date DESC",
+            [$invoiceId]
+        );
+
+        return $invoice;
+    }
+
+    /**
+     * Mark invoice as void
+     */
+    public static function void(int $invoiceId, int $businessId, int $userId): bool {
+        $inv = self::getById($invoiceId, $businessId);
+        if (!$inv) return false;
+
+        Database::update('invoices', ['status' => 'void'], 'id = ? AND business_id = ?', [$invoiceId, $businessId]);
+        ActivityLog::log($businessId, $userId, 'invoice_voided', 'invoice', $invoiceId, "Voided invoice {$inv['invoice_number']}");
+        return true;
+    }
+}

@@ -1,0 +1,112 @@
+/* ============================================================
+   YBT Management Software — Print Stylesheet
+   Clean invoice, quotation, and report printing
+   ============================================================ */
+
+@media print {
+  /* Hide non-printable app shell elements */
+  .sidebar,
+  .topbar,
+  .mobile-overlay,
+  .btn,
+  .actions-bar,
+  .page-header-actions,
+  .toast-container,
+  .modal-backdrop,
+  .pagination,
+  .filter-bar,
+  .search-box,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Reset layout constraints for paper */
+  body, html {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  .app-layout,
+  .main-content,
+  .page-container {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .card {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin-bottom: 20px !important;
+    background: transparent !important;
+  }
+
+  /* Typography for print */
+  h1, h2, h3, h4, h5, h6 {
+    color: #000000 !important;
+    page-break-after: avoid;
+  }
+
+  /* Printable tables */
+  .data-table,
+  .invoice-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    page-break-inside: auto;
+  }
+
+  .data-table tr,
+  .invoice-table tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  .data-table th,
+  .invoice-table th {
+    background-color: #f1f5f9 !important;
+    color: #000000 !important;
+    border: 1px solid #cbd5e1 !important;
+    padding: 6px 10px !important;
+    font-size: 10pt !important;
+  }
+
+  .data-table td,
+  .invoice-table td {
+    border: 1px solid #e2e8f0 !important;
+    padding: 6px 10px !important;
+    font-size: 10pt !important;
+  }
+
+  /* Invoice-specific print enhancements */
+  .invoice-paper {
+    padding: 15mm !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .invoice-header {
+    border-bottom: 2px solid #0284c7 !important;
+    padding-bottom: 15px !important;
+    margin-bottom: 20px !important;
+  }
+
+  /* Force background colors where needed */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Page margins */
+  @page {
+    margin: 12mm 15mm;
+    size: auto;
+  }
+}
