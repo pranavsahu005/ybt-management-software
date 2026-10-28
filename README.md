@@ -24,8 +24,8 @@
   <tr>
     <td align="center" width="33%">
       <b>Lead Architect</b><br>
-      <b>Pranav Sahu</b><br>
-      <sub>System Design & Engineering</sub>
+      <b>Co. Pranav Raj Sahu</b><br>
+      <sub>Hexatom Team &bull; System Architecture</sub>
     </td>
     <td align="center" width="33%">
       <b>AI Innovation Lab</b><br>
@@ -371,4 +371,44 @@ YBT Management Software/
 - [User Operational Manual](docs/user-manual.md)
 
 ---
-&copy; 2026 **YOU B TECH** &bull; All Rights Reserved.
+
+## 🏛️ Enterprise Engineering & Corporate Attribution
+
+<div align="center">
+
+### **Co. Pranav Raj Sahu**
+#### **Hexatom Team &bull; Aronar AI**
+
+<p>
+  <b>Enterprise Software Systems &bull; Cognitive AI Frameworks &bull; High-Availability Infrastructure</b>
+</p>
+
+</div>
+
+<table align="center" width="100%">
+  <tr>
+    <td width="50%" valign="top">
+      <h3>📬 Contact & Inquiries</h3>
+      <ul>
+        <li><b>Phone / WhatsApp:</b> <a href="tel:+918103244491">+91 8103244491</a></li>
+        <li><b>Primary Dev:</b> <a href="mailto:hexatom.dev@gmail.com">hexatom.dev@gmail.com</a></li>
+        <li><b>Personal:</b> <a href="mailto:pranavsahu005@gmail.com">pranavsahu005@gmail.com</a></li>
+        <li><b>Aronar Brand:</b> <a href="mailto:aronararonarbrand@gmail.com">aronararonarbrand@gmail.com</a></li>
+      </ul>
+    </td>
+    <td width="50%" valign="top">
+      <h3>🌐 Official Platforms & Portfolios</h3>
+      <ul>
+        <li>🏛️ <b>Hexatom:</b> <a href="https://hexatom-org.vercel.app/" target="_blank">hexatom-org.vercel.app</a></li>
+        <li>🤖 <b>Aronar AI:</b> <a href="http://aronar-ai.vercel.app/" target="_blank">aronar-ai.vercel.app</a></li>
+        <li>✨ <b>Hexatom Portfolio:</b> <a href="https://hexatom.imaginefuture1-7.workers.dev/" target="_blank">hexatom.imaginefuture1-7.workers.dev</a></li>
+        <li>👨‍💻 <b>Pranav Sahu Portfolio:</b> <a href="https://pranav005-portfolio.netlify.app/" target="_blank">pranav005-portfolio.netlify.app</a></li>
+        <li>🛍️ <b>Wear Tome:</b> <a href="https://weartome.com" target="_blank">weartome.com</a></li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+<p align="center">
+  <sub>&copy; 2026 <b>Hexatom</b> &bull; Built with pride by <b>Co. Pranav Raj Sahu</b> (Hexatom Team / Aronar AI). All rights reserved.</sub>
+</p>

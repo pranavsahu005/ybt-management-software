@@ -187,7 +187,19 @@ $$\text{Days Overdue} = \max\left(0, \frac{\text{Current Date} - \text{Invoice D
 
 ## 👨‍💻 Developer & Engineering Attribution
 
-- **Lead Architect**: Pranav Sahu
+<div align="center">
+
+### **Co. Pranav Raj Sahu**
+#### **Hexatom Team &bull; Aronar AI**
+
+</div>
+
+- **Lead Architect**: Co. Pranav Raj Sahu
 - **AI Research & Platform**: [Aronar AI](http://aronar-ai.vercel.app/)
 - **Core Engineering Lab**: [Hexatom](https://hexatom-org.vercel.app/)
+- **Hexatom Portfolio**: [hexatom.imaginefuture1-7.workers.dev](https://hexatom.imaginefuture1-7.workers.dev/)
+- **Pranav Sahu Portfolio**: [pranav005-portfolio.netlify.app](https://pranav005-portfolio.netlify.app/)
+- **Wear Tome**: [weartome.com](https://weartome.com)
+- **Direct Contact**: +91 8103244491
+- **Email Inquiries**: [hexatom.dev@gmail.com](mailto:hexatom.dev@gmail.com) • [pranavsahu005@gmail.com](mailto:pranavsahu005@gmail.com) • [aronararonarbrand@gmail.com](mailto:aronararonarbrand@gmail.com)
 - **Repository**: [github.com/pranavsahu005/ybt-management-software](https://github.com/pranavsahu005/ybt-management-software)

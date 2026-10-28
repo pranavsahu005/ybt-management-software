@@ -13,7 +13,7 @@ $isPublicPage = $isPublicPage ?? false;
 
         <footer class="app-footer">
             <div class="footer-left">
-                <span>&copy; <?= date('Y') ?> <strong><?= e(APP_NAME) ?></strong>. All rights reserved.</span>
+                <span>&copy; <?= date('Y') ?> <strong><?= e(APP_NAME) ?></strong> &bull; Co. Pranav Raj Sahu (Hexatom Team / Aronar AI). All rights reserved.</span>
             </div>
             <div class="footer-right">
                 <span class="text-muted">v<?= e(APP_VERSION) ?></span>
