@@ -146,6 +146,66 @@ flowchart TD
 
 ---
 
+## 🔄 Commercial Financial Flow & Tax Routing
+
+```mermaid
+flowchart TD
+    Lead["New Opportunity / Inbound Lead"] --> Quotation["Draft Commercial Quotation"]
+    Quotation --> TaxCheck{"State of Supply Match?"}
+    
+    TaxCheck -->|"Same State (Intra-State)"| CGST_SGST["Apply CGST 9% + SGST 9% (18% Total)"]
+    TaxCheck -->|"Different State (Inter-State)"| IGST["Apply Integrated IGST 18%"]
+    
+    CGST_SGST --> VerifiedInv["Generate Sequential GST Tax Invoice"]
+    IGST --> VerifiedInv
+    
+    VerifiedInv --> Payment{"Payment Status"}
+    Payment -->|"Full Payment"| Paid["Settled & Logged in Customer Ledger"]
+    Payment -->|"Partial / Unpaid"| Aging["Bucket in Debt Radar (0-30, 31-60, 61-90, 90+ Days)"]
+```
+
+---
+
+## 🤖 AI Digital Manager Protocol (Human-in-the-Loop)
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Employee as Team Member
+    participant Copilot as AI Digital Manager
+    participant Ledger as Action Proposal Ledger
+    actor Admin as Business Owner (Sign-Off)
+
+    Employee->>Copilot: "Propose new tax invoice for customer"
+    Copilot->>Copilot: Compute Place of Supply & Tax Distribution
+    Note over Copilot: INVARIANT: Cannot mutate accounting ledger directly!
+    Copilot->>Ledger: Insert Proposal (Status = PENDING)
+    Copilot-->>Employee: "Proposal created. Awaiting Owner approval."
+    Admin->>Ledger: Review Proposal, Taxes & Line Items
+    alt Approved by Owner
+        Admin->>Ledger: Execute Approval
+        Ledger-->>Admin: Invoice Created & Number Sequenced
+    else Rejected by Owner
+        Admin->>Ledger: Mark Proposal as Rejected
+    end
+```
+
+---
+
+## 💻 Technology Stack & Architectural Matrix
+
+| Layer | Technology | Version | Purpose in Architecture |
+| :--- | :--- | :--- | :--- |
+| **Backend Runtime** | **PHP** | `8.2.12+` | High-performance core execution, strict typing, session isolation |
+| **Relational Database**| **MySQL / MariaDB** | `8.0+ / Port 3307` | Relational integrity, foreign keys, transaction rollbacks |
+| **Database Access** | **PDO Singleton** | `Native` | Prepared statements, zero SQL injection risk |
+| **Cryptography** | **OpenSSL (AES-256-CBC)**| `Native` | At-rest encryption for LLM API keys and secrets |
+| **Data Visualization**| **Chart.js** | `4.4.1 UMD` | KPI telemetries, revenue vs expenses, aging radar graphs |
+| **Interface Icons** | **Tabler Icons** | `v2.40.0` | Crisp SVG and webfont iconography across dark/light themes |
+| **Frontend Styling** | **Modern Vanilla CSS**| `CSS3 Vars` | Fluid grid, responsive flexbox, light/dark mode engine |
+
+---
+
 ## 🚀 Quick Setup & Installation
 
 ### Requirements
