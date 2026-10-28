@@ -46,6 +46,71 @@
 
 ---
 
+## 🗺️ System Topology & Enterprise Mindmap
+
+```mermaid
+flowchart LR
+    Root["YBT Management Suite"] --> CRM["CRM & Pipelines"]
+    Root --> Fin["GST Invoicing & Finance"]
+    Root --> AI["AI Operations Manager"]
+    Root --> Gov["Governance & Security"]
+    Root --> Tel["Telemetry & Analytics"]
+
+    CRM --> C1["Customer 360 Ledger"]
+    CRM --> C2["Kanban Sales Pipeline"]
+    CRM --> C3["Team Task Delegator"]
+
+    Fin --> F1["Dual-Regime GST Engine"]
+    Fin --> F2["Quotation to Invoice Machine"]
+    Fin --> F3["Instant PDF & QR Remittance"]
+
+    AI --> A1["Multi-Provider LLM Gateway"]
+    AI --> A2["Advisory Invariant Protocol"]
+    AI --> A3["Owner Sign-Off Gate"]
+
+    Gov --> G1["Multi-Tenant Isolation"]
+    Gov --> G2["RBAC Capability Matrix"]
+    Gov --> G3["AES-256 Vault Encryption"]
+
+    Tel --> T1["Debt & Overdue Radar"]
+    Tel --> T2["Operating Expense Tracker"]
+    Tel --> T3["Executive KPI Telemetry"]
+```
+
+---
+
+## 🏗️ Enterprise System Architecture Blueprint
+
+```mermaid
+flowchart TD
+    Client["Browser / Mobile Client"] --> WebServer["Apache Web Server (Port 80 / 443)"]
+    WebServer --> Bootstrap["includes/bootstrap.php (Session & Environment)"]
+    
+    subgraph "Core Security Perimeter"
+        Bootstrap --> Guard1["CSRF Token Validator"]
+        Guard1 --> Guard2["RBAC & Permission Evaluator"]
+        Guard2 --> Guard3["Multi-Tenant Business Scoper"]
+    end
+
+    Guard3 --> Router["View / API Controllers"]
+
+    subgraph "Enterprise Domain Services"
+        Router --> SvcCRM["customer-service.php"]
+        Router --> SvcInv["invoice-service.php"]
+        Router --> SvcAI["ai-service.php (Google / OpenRouter / Anthropic)"]
+        Router --> SvcRep["report-service.php"]
+    end
+
+    SvcCRM --> PDOSingleton["includes/db.php (PDO Singleton)"]
+    SvcInv --> PDOSingleton
+    SvcAI --> PDOSingleton
+    SvcRep --> PDOSingleton
+
+    PDOSingleton --> MySQL[("MySQL Database Server (Port 3307 / 3306)")]
+```
+
+---
+
 ## 🌟 Core Highlights & Capabilities
 
 ### 1. 🤖 AI Digital Operations Manager
