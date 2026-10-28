@@ -386,27 +386,40 @@ YBT Management Software/
 </div>
 
 <table align="center" width="100%">
-  <tr>
-    <td width="50%" valign="top">
-      <h3>📬 Contact & Inquiries</h3>
-      <ul>
-        <li><b>Phone / WhatsApp:</b> <a href="tel:+918103244491">+91 8103244491</a></li>
-        <li><b>Primary Dev:</b> <a href="mailto:hexatom.dev@gmail.com">hexatom.dev@gmail.com</a></li>
-        <li><b>Personal:</b> <a href="mailto:pranavsahu005@gmail.com">pranavsahu005@gmail.com</a></li>
-        <li><b>Aronar Brand:</b> <a href="mailto:aronararonarbrand@gmail.com">aronararonarbrand@gmail.com</a></li>
-      </ul>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🌐 Official Platforms & Portfolios</h3>
-      <ul>
-        <li>🏛️ <b>Hexatom:</b> <a href="https://hexatom-org.vercel.app/" target="_blank">hexatom-org.vercel.app</a></li>
-        <li>🤖 <b>Aronar AI:</b> <a href="http://aronar-ai.vercel.app/" target="_blank">aronar-ai.vercel.app</a></li>
-        <li>✨ <b>Hexatom Portfolio:</b> <a href="https://hexatom.imaginefuture1-7.workers.dev/" target="_blank">hexatom.imaginefuture1-7.workers.dev</a></li>
-        <li>👨‍💻 <b>Pranav Sahu Portfolio:</b> <a href="https://pranav005-portfolio.netlify.app/" target="_blank">pranav005-portfolio.netlify.app</a></li>
-        <li>🛍️ <b>Wear Tome:</b> <a href="https://weartome.com" target="_blank">weartome.com</a></li>
-      </ul>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th align="left">🌐 Ecosystem Platform</th>
+      <th align="left">🔗 Verified URL</th>
+      <th align="left">📌 Focus & Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>🏛️ <b>Hexatom</b></td>
+      <td><a href="https://hexatom-org.vercel.app/" target="_blank">hexatom-org.vercel.app</a></td>
+      <td>Core Systems & Enterprise Software Engineering</td>
+    </tr>
+    <tr>
+      <td>🤖 <b>Aronar AI</b></td>
+      <td><a href="http://aronar-ai.vercel.app/" target="_blank">aronar-ai.vercel.app</a></td>
+      <td>Next-Gen Agentic Intelligence & Cognitive Frameworks</td>
+    </tr>
+    <tr>
+      <td>✨ <b>Hexatom Portfolio</b></td>
+      <td><a href="https://hexatom.imaginefuture1-7.workers.dev/" target="_blank">hexatom.imaginefuture1-7.workers.dev</a></td>
+      <td>Hexatom Labs Enterprise Showcase & Architecture</td>
+    </tr>
+    <tr>
+      <td>👨‍💻 <b>Pranav Sahu Portfolio</b></td>
+      <td><a href="https://pranav005-portfolio.netlify.app/" target="_blank">pranav005-portfolio.netlify.app</a></td>
+      <td>Personal Engineering Portfolio & System Works</td>
+    </tr>
+    <tr>
+      <td>🛍️ <b>Wear Tome</b></td>
+      <td><a href="https://weartome.in" target="_blank">weartome.in</a></td>
+      <td>Modern Consumer Tech & Brand Platform</td>
+    </tr>
+  </tbody>
 </table>
 
 <p align="center">
