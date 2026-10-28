@@ -206,6 +206,48 @@ sequenceDiagram
 
 ---
 
+## 🗄️ Relational Data Schema & Entity Model (ERD)
+
+```mermaid
+erDiagram
+    BUSINESSES ||--o{ USERS : "employs"
+    BUSINESSES ||--o{ CUSTOMERS : "manages"
+    BUSINESSES ||--o{ PRODUCTS : "catalogs"
+    BUSINESSES ||--o{ QUOTATIONS : "proposes"
+    BUSINESSES ||--o{ INVOICES : "issues"
+    BUSINESSES ||--o{ EXPENSES : "tracks"
+    BUSINESSES ||--o{ AI_ACTION_PROPOSALS : "audits"
+
+    CUSTOMERS ||--o{ INVOICES : "receives"
+    CUSTOMERS ||--o{ QUOTATIONS : "requests"
+    CUSTOMERS ||--o{ PAYMENTS : "remits"
+
+    QUOTATIONS ||--o{ QUOTATION_ITEMS : "includes"
+    INVOICES ||--o{ INVOICE_ITEMS : "specifies"
+    INVOICES ||--o{ PAYMENTS : "reconciles"
+
+    USERS ||--o{ AI_CONVERSATIONS : "interacts"
+    AI_CONVERSATIONS ||--o{ AI_ACTION_PROPOSALS : "generates"
+```
+
+---
+
+## 📊 Executive Telemetry & Debt Radar Metrics
+
+The dashboard telemetry combines real-time transaction aggregates with predictive aging risk scoring:
+
+| Telemetry Radar | Calculation Engine | Operational Action Trigger |
+| :--- | :--- | :--- |
+| **Gross Revenue** | $\sum (\text{Paid Invoices} + \text{Partial Collections})$ | Core Top-line Growth Metric |
+| **Pending Receivables** | $\sum (\text{Invoice Gross} - \text{Payments Settled})$ | Net Working Capital Locked |
+| **Operating Margin** | $(\text{Total Revenue} - \text{Operating Expenses}) \div \text{Revenue}$ | Real-time Net Profitability Index |
+| **Aging 0–30 Days** | Invoices due within standard payment window | Courteous automated WhatsApp / Email reminder |
+| **Aging 31–60 Days** | Overdue by 1 business billing cycle | Account Manager direct phone dispatch |
+| **Aging 61–90 Days** | High default exposure window | Credit line paused; Delivery freeze |
+| **Aging 90+ Days** | Critical debt radar tier | Legal dispatch / Bad debt reserve provision |
+
+---
+
 ## 🚀 Quick Setup & Installation
 
 ### Requirements
