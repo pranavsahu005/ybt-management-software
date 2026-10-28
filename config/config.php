@@ -9,18 +9,18 @@ if (!defined('YBT_ROOT')) {
     define('YBT_ROOT', dirname(__DIR__));
 }
 
-return [
+$base = [
     // Application
     'app_name'    => 'YBT Management Software',
     'app_version' => '1.0.0',
-    'app_url'     => 'http://localhost/YBT%20Management%20Software',
+    'app_url'     => 'http://localhost/ybt-management-software-main',
     'environment' => 'development', // development | production
     'debug'       => true,
     'timezone'    => 'Asia/Kolkata',
 
     // Database
     'db_host'     => '127.0.0.1',
-    'db_port'     => 3306,
+    'db_port'     => 3307,
     'db_name'     => 'ybt_management',
     'db_user'     => 'root',
     'db_pass'     => '',
@@ -46,3 +46,14 @@ return [
     // Encryption key for API keys at rest (change in production!)
     'encryption_key' => 'CHANGE_THIS_IN_PRODUCTION_32_CHAR_KEY!',
 ];
+
+// Merge local environment config if present
+$localConfigFile = __DIR__ . '/config.local.php';
+if (file_exists($localConfigFile)) {
+    $localConfig = require $localConfigFile;
+    if (is_array($localConfig)) {
+        $base = array_replace_recursive($base, $localConfig);
+    }
+}
+
+return $base;
