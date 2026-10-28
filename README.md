@@ -252,29 +252,34 @@ The dashboard telemetry combines real-time transaction aggregates with predictiv
 
 ### Requirements
 - **Web Server:** Apache (via XAMPP, WampServer, or standalone)
-- **PHP:** Version 8.1 or higher (with `pdo_mysql`, `curl`, `openssl`, `mbstring` extensions)
-- **Database:** MySQL 5.7+ or MariaDB 10.4+
+- **PHP:** Version 8.1 or higher (PHP 8.2+ recommended; `pdo_mysql`, `curl`, `openssl`, `mbstring` enabled)
+- **Database:** MySQL 5.7+ / 8.0+ or MariaDB 10.4+ (Default: `Port 3307` or `3306`)
 
-### Setup Steps
+### Instant Windows Setup
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/YouBTech01/ybt-management-software.git
+   git clone https://github.com/pranavsahu005/ybt-management-software.git
    ```
-2. **Move to Web Root:**
-   Move or place the directory into your server's root (e.g. `C:\xampp\htdocs\YBT Management Software`).
-3. **Database Setup:**
-   - Create a MySQL database named `ybt_management`:
-     ```sql
-     CREATE DATABASE ybt_management CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-     ```
-   - Run the database migration and seeder:
-     ```bash
-     php database/seed.php
-     ```
-4. **Configuration:**
-   - Verify settings in `config/config.php` (DB credentials, encryption key, session settings).
-5. **Launch Application:**
-   - Open your browser at: `http://localhost/YBT%20Management%20Software`
+2. **Move to XAMPP Root:**
+   Ensure the directory is placed in: `C:\xampp\htdocs\ybt-management-software-main`
+3. **Run One-Click Database Seeder:**
+   ```bash
+   php database/seed.php
+   ```
+4. **Launch Application:**
+   Double click **`start-app.bat`** in the project root! It automatically checks Apache, detects MySQL on Port 3307, and opens your browser directly at:
+   ```
+   http://localhost/ybt-management-software-main
+   ```
+
+---
+
+## ⚡ Clickable Windows Productivity Scripts
+
+| Script | Purpose & Capabilities |
+| :--- | :--- |
+| **[`start-app.bat`](start-app.bat)** | **One-Click Local Launcher:** Verifies Apache port `80` and MySQL port `3307`, starts services if offline, and launches default browser. |
+| **[`git-push.bat`](git-push.bat)** | **Interactive Multi-Commit Tool:** Inspects uncommitted changes, prompts for commit count (e.g. 2 commits), stages files incrementally, prompts for distinct commit messages, and asks for explicit confirmation before pushing to your GitHub fork. |
 
 ---
 
@@ -284,6 +289,27 @@ The dashboard telemetry combines real-time transaction aggregates with predictiv
 | :--- | :--- | :--- | :--- | :--- |
 | **Business Owner** | Vikram Malhotra | `owner@ybt.com` | `password123` | Full Super-Admin & Financial Controls |
 | **Operations Manager** | Rohan Verma | `manager@ybt.com` | `password123` | CRM, Pipeline, Invoicing & AI Operations |
+
+---
+
+## 📚 Technical Documentation Hub
+
+- **Business Logic & Invariants:** [`LOGIC.md`](LOGIC.md)
+- **Product Requirements Document:** [`YBT_Management_Software_PRD.md`](YBT_Management_Software_PRD.md)
+- **AI Engine Configuration Guide:** [`docs/ai-configuration.md`](docs/ai-configuration.md)
+- **Backup & Disaster Recovery:** [`docs/backup-restore.md`](docs/backup-restore.md)
+- **Step-by-step Installation:** [`docs/installation.md`](docs/installation.md)
+- **Operations Manual:** [`docs/user-manual.md`](docs/user-manual.md)
+
+---
+
+## 🌐 Innovation & Engineering Credits
+
+Designed and architected by **Pranav Sahu** in collaboration with:
+- **[Aronar AI](http://aronar-ai.vercel.app/)** — Autonomous Agentic Frameworks & Enterprise Intelligence
+- **[Hexatom](https://hexatom-org.vercel.app/)** — Modern Digital Infrastructure & Core Systems
+
+Licensed under proprietary commercial license for enterprise deployment.
 
 ---
 
