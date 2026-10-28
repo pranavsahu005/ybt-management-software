@@ -1,11 +1,48 @@
-# YBT Management Software (Enterprise Edition)
+# ⚡ YBT Management Software (Enterprise Edition)
 
-[![PRD Specification](https://img.shields.io/badge/PRD-Compliant-blue.svg)](YBT_Management_Software_PRD.md)
-[![License](https://img.shields.io/badge/License-Proprietary-green.svg)](#)
-[![PHP](https://img.shields.io/badge/PHP-8.2+-purple.svg)](https://php.net)
-[![MySQL](https://img.shields.io/badge/MySQL-8.0%2B%20%2F%20MariaDB-orange.svg)](https://mariadb.org)
+<p align="center">
+  <img src="executive-dashboard.webp" alt="YBT Management Software - Executive Dashboard Interface" width="100%" style="border-radius: 12px; box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25); border: 1px solid rgba(255,255,255,0.1);">
+</p>
 
-**YBT Management Software** is a full-stack, enterprise-grade business management and ERP system designed for Indian trade, distribution, and service enterprises. Built from the ground up according to the comprehensive specification in [YBT_Management_Software_PRD.md](YBT_Management_Software_PRD.md).
+<p align="center">
+  <b>Enterprise-Grade Business Management, GST Invoicing Engine & Advisory AI Digital Manager</b>
+</p>
+
+<p align="center">
+  <a href="YBT_Management_Software_PRD.md"><img src="https://img.shields.io/badge/PRD-100%25%20Compliant-0ea5e9?style=for-the-badge&logo=googledocs&logoColor=white" alt="PRD Compliant"></a>
+  <a href="LOGIC.md"><img src="https://img.shields.io/badge/Logic%20Spec-Verified-6366f1?style=for-the-badge&logo=diagramsdotnet&logoColor=white" alt="Logic Specification"></a>
+  <a href="https://php.net"><img src="https://img.shields.io/badge/PHP-8.2+-777bb4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.2+"></a>
+  <a href="https://mariadb.org"><img src="https://img.shields.io/badge/MySQL-8.0%20%2F%20Port%203307-f29111?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL 3307"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Security-AES--256--CBC-10b981?style=for-the-badge&logo=securityscorecard&logoColor=white" alt="Security AES-256"></a>
+</p>
+
+---
+
+## 👨‍💻 Engineering & Developer Ecosystem
+
+<table align="center" width="100%">
+  <tr>
+    <td align="center" width="33%">
+      <b>Lead Architect</b><br>
+      <b>Pranav Sahu</b><br>
+      <sub>System Design & Engineering</sub>
+    </td>
+    <td align="center" width="33%">
+      <b>AI Innovation Lab</b><br>
+      <a href="http://aronar-ai.vercel.app/"><b>Aronar AI</b></a><br>
+      <sub>Next-Gen Cognitive Intelligence Platform</sub>
+    </td>
+    <td align="center" width="33%">
+      <b>Core Software Lab</b><br>
+      <a href="https://hexatom-org.vercel.app/"><b>Hexatom</b></a><br>
+      <sub>Enterprise Technology & Systems</sub>
+    </td>
+  </tr>
+</table>
+
+---
+
+**YBT Management Software** is a full-stack, enterprise-grade business management and ERP system designed for Indian trade, distribution, and service enterprises. Built from the ground up according to the comprehensive specification in [YBT_Management_Software_PRD.md](YBT_Management_Software_PRD.md) and technical invariants in [LOGIC.md](LOGIC.md).
 
 ---
 
